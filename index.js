@@ -5,8 +5,7 @@ class Contenedor {
 
     constructor(archivo) {
         this.archivo = "./archivos/"+archivo+".json"
-      };
-    
+      };    
 
 //---------------------------
 //        METODO SAVE
@@ -111,6 +110,8 @@ class Contenedor {
 
 
 // ---------------------------------------------------------------------
+
+
 
 const objetoInicial1 = {
   nombre: 'Matias',
