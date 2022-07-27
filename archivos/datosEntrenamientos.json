@@ -1,12 +1,23 @@
 [
   {
-    "nombre": "Matias",
-    "apellido": "Borjas",
+    "nombre": "HIIT",
+    "Duracion": 60,
+    "Frecuencia": 3,
+    "Precio": 4000,
     "id": 1
   },
   {
-    "nombre": "Zoila",
-    "apellido": "Cerda",
+    "nombre": "Core",
+    "Duracion": 40,
+    "Frecuencia": 4,
+    "Precio": 3600,
     "id": 2
+  },
+  {
+    "nombre": "Piernas",
+    "Duracion": 60,
+    "Frecuencia": 3,
+    "Precio": 4000,
+    "id": 3
   }
 ]

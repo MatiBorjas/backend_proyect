@@ -1,0 +1,26 @@
+{
+  "name": "backend_project",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiBorjas/backend_proyect.git"
+  },
+  "author": "Mr. Threepwood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatiBorjas/backend_proyect/issues"
+  },
+  "homepage": "https://github.com/MatiBorjas/backend_proyect#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
