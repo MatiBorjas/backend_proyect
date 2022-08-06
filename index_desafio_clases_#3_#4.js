@@ -38,7 +38,7 @@ class Contenedor {
     };
 
 //---------------------------
-//METODO DELETE BY ID
+//METODO GET BY ID
 //---------------------------
 
   async getById(id){
