@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body>
+    <%- include('../partials/navbar'); %>
+
+<br/>
+
+<h1><%=title%></h1>
+    
+    <div>
+      <p>
+        Id: <%=productoNuevo.id%>
+      </p>
+        <%=productoNuevo.title%><br/>
+        <%=productoNuevo.price%><br/>
+        <img src="<%=productoNuevo.thumbnail%>" class="product-img"/>
+    </div>
+
+<br/>
+
+<br/>
+
+    <a href="http://localhost:8080/products" class="btn">Volver a la lista de productos</a>
+    <br/>
+    <br/>
+    <br/>
+    <%- include('../partials/footer'); %>
+    <br/>
+  </body>
+</html>

@@ -4,6 +4,7 @@
     "duracion": 60,
     "frecuencia": 3,
     "precio": 4000,
+    "thumbnail": "https://dummyimage.com/300x300/000000/ff3636&text=Product+Thumbnail",
     "id": 1
   },
   {
@@ -11,6 +12,7 @@
     "duracion": 40,
     "frecuencia": 4,
     "precio": 3800,
+    "thumbnail": "https://dummyimage.com/300x300/000000/ff3636&text=Product+Thumbnail",
     "id": 2
   },
   {
@@ -18,6 +20,7 @@
     "duracion": 60,
     "frecuencia": 3,
     "precio": 4000,
+    "thumbnail": "https://dummyimage.com/300x300/000000/ff3636&text=Product+Thumbnail",
     "id": 3
   },
   {
@@ -25,6 +28,7 @@
     "duracion": "30",
     "frecuencia": "3",
     "precio": "5000",
+    "thumbnail": "https://dummyimage.com/300x300/000000/ff3636&text=Product+Thumbnail",
     "id": 4
   }
 ]

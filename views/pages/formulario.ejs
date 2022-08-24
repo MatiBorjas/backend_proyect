@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body>
+    <%- include('../partials/navbar'); %>
+
+    <h1>Formulario de carga</h1>
+        <form method="post" action="/form" id="form">
+            <input type="text" name="title"/>
+            <input type="text" name="price"/>
+            <input type="text" name="thumbnail"/>
+            <input type="submit" value="Cargar"/>
+        </form>
+    <br/>
+    <br/>
+    <br/>
+
+    <%=title %>
+    <% productos.forEach((producto)=>{ %>
+      <p>
+        Id: <%=producto.id%>
+        <br/>
+        <%=producto.nombre%>
+        <br/>
+        Duracion: <%=producto.duracion%> minutos
+        <br/>
+        Frecuencia: <%=producto.frecuencia%> dias a la semana
+        <br/>
+        Precio: $<%=producto.precio%>
+        <br/>
+        <img class="product-img" src="<%=producto.thumbnail %>"/><br/>
+      </p>
+        <br/>
+        <br/>
+    <% }) %>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="chat-container">
+      <form onsubmit="return enviar()">
+          <label for="correo">Ingrese su correo electronico
+              <input class="input" id="caja-correo" type="correo" name="correo" value="" placeholder="correo" required/>
+          </label>
+          <label for="msg">Ingrese su mensaje
+              <input class="input" id="caja-msg" type="text" name="msg" value="" placeholder="Mensaje" required/>
+          </label>
+          <button type="submit">Enviar mensaje</button>
+      </form>
+      <br/>    
+      <div id="chat-container"></div>
+  </div>
+
+    <!-- <a href="http://localhost:8080/products" class="btn">Volver a la lista de productos</a> -->
+    <br/>
+    <br/>
+    <br/>
+    <%- include('../partials/footer'); %>
+    <br/>
+  </body>
+</html>
