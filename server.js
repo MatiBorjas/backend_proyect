@@ -150,7 +150,8 @@ class Contenedor {
 }
 
 const productos = new Contenedor('datosEntrenamientos');
-const chats = new Contenedor ('chats');
+const chats = new Contenedor('chats');
+
 
 //---------------------------------------------------------------------
 //        PETICIONES A /
@@ -196,30 +197,35 @@ router.get('/:id', (req, res) => {
 });
 
 app.get('/form', (req, res) => {
+  res.render('pages/formulario',{ title: 'listado de productos' });
+});
 
-  let productosData =  productos.getAll();
-  res.render('pages/formulario',{ title: 'listado de productos', productos: productosData });
+
+
+let productosData = productos.getAll();
+let chatData = chats.getAll();
+
+io.on('connection', (socket) => {
+  console.log("Usuario Conectado" + socket.id);
   
-  let chat = [];
-
-  io.on('conection', (socket) => {
-    
-    chat.push(socket.id)
-    io.socket.emit('productos', productos.getAll());
-    io.sockets.emit('chat', chat);
-
-    socket.on('nuevoProducto', (nuevoProducto) => {
-      productos.save(nuevoProducto)
-      io.socket.emit('producto', productos.getAll())
-    });
-
-    socket.on('nuevoMsg', (msg) => {
-      chats.save(msg);
-      io.sockets.emit('chat', chat);
-    });
+  io.sockets.emit('productos', productosData);
+  io.sockets.emit('chat', chatData);
+  
+  socket.on('nuevoMsg', (msg) => {
+    chats.save(msg)
+    let nuevoChat = chats.getAll();
+    io.sockets.emit('chat', nuevoChat);
+  });
+  
+  socket.on('productoNvo', (nuevoProducto) => {
+    productos.save(nuevoProducto)
+    let productoAgregado = productos.getAll();
+    io.sockets.emit('productos', productoAgregado)
   });
 
 });
+
+
 
 
 
