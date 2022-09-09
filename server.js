@@ -63,26 +63,28 @@ app.get("/", (req, res) => {
 //---------------------------------------------------------------------
 //        PETICIONES A /api/productos
 //---------------------------------------------------------------------
-router.get("/", async (req, res) => {
+router.get("/", async(req, res) => {
   crearTablaProductos();
+  crearTablaMensajes()
 
   let productosData = await productos.getAll();
 
   if (!productosData) {
       res.json({error: "Hubo un error al leer el archivo."});
   } else {
-      res.render('pages/productosLista', { title: 'listado de productos', products: productosData });
+      res.render('pages/formulario', { title: 'listado de productos', products: productosData });
   }
 });
 
 
-// let productosData = productos.getAll();
-// let chatData = chats.getAll();
-let adminAcces = false;
 
-io.on('connection', (socket) => {
+let adminAcces = true;
+
+io.on('connection', async (socket) => {
   console.log("Usuario Conectado" + socket.id);
 
+  let productosData = await productos.getAll();
+  let chatData = await chats.getAll();
   
   io.sockets.emit('productos', productosData);
   io.sockets.emit('chat', chatData);
@@ -101,49 +103,49 @@ io.on('connection', (socket) => {
 
 });
 
-app.post('/form', (req, res) => {
-  const { body } = req;
+// app.post('/form', (req, res) => {
+//   const { body } = req;
 
-  const indice = productosData.map(elem => elem.id).sort();
-  id = indice[indice.length - 1] + 1 
+//   const indice = productosData.map(elem => elem.id).sort();
+//   id = indice[indice.length - 1] + 1 
   
-  const productoAgregar = {...body, id}
+//   const productoAgregar = {...body, id}
 
-  productosData.push(productoAgregar);
-  res.render('pages/productoNuevo', { productoNuevo: productoAgregar, title:'Nuevo producto agregado'});
-});
+//   productosData.push(productoAgregar);
+//   res.render('pages/productoNuevo', { productoNuevo: productoAgregar, title:'Nuevo producto agregado'});
+// });
 
-router.post('/', (req, res) => {
-  const { body } = req; 
-  productos.save( body )
+// router.post('/', (req, res) => {
+//   const { body } = req; 
+//   productos.save( body )
 
-  res.json({succes:"ok" , productoAgregado: body});
-});
+//   res.json({succes:"ok" , productoAgregado: body});
+// });
 
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
-  const { body } = req;
+// router.put('/:id', (req, res) => {
+//   const { id } = req.params;
+//   const { body } = req;
 
-  let productoModificar = productos.getAll().find(e => e.id == id);
+//   let productoModificar = productos.getAll().find(e => e.id == id);
   
-  if(productoModificar){
-  productoModificar = {...productoModificar, ...body};
-  productos.update(id, productoModificar);
-  res.json({succe:'ok', nuevo: productoModificar})
-  } else {
-    res.json({error: 'Producto no encontrado'});
-  }
-});
+//   if(productoModificar){
+//   productoModificar = {...productoModificar, ...body};
+//   productos.update(id, productoModificar);
+//   res.json({succe:'ok', nuevo: productoModificar})
+//   } else {
+//     res.json({error: 'Producto no encontrado'});
+//   }
+// });
 
-router.delete('/:id', (req, res) =>{
-  const { id } = req.params;
+// router.delete('/:id', (req, res) =>{
+//   const { id } = req.params;
 
-  const busquedaProducto = productos.getAll().find(e => e.id == id);
+//   const busquedaProducto = productos.getAll().find(e => e.id == id);
 
-  if(busquedaProducto){
-    productos.deleteById(id);
-    res.json({ succes:'ok'});
-  } else {
-    res.json({error: 'Producto no encontrado'});
-  }
-});
+//   if(busquedaProducto){
+//     productos.deleteById(id);
+//     res.json({ succes:'ok'});
+//   } else {
+//     res.json({error: 'Producto no encontrado'});
+//   }
+// });

@@ -4,12 +4,13 @@ socket.on('connect', () => {
   console.log('Conectado como ' + socket.id);
 });
 
-
 socket.on('productos', (data) => {
   
-  let htmlToRender = data.reduce((previewHtml, currentHtml) => previewHtml + `
-  <tr>
+  let htmlToRender = data.reduce((previewHtml, currentHtml) => previewHtml + 
+  `<tr>
   <td> <h3>${currentHtml.nombre}</h3> </td>
+  <td> <h4>${currentHtml.duracion}</h4> </td>
+  <td> <h4>${currentHtml.frecuencia}</h4> </td>
   <td> <h4>${currentHtml.precio}</h4> </td>
   <td> <img src="${currentHtml.thumbnail}"/> </td>
   </tr>`, '')

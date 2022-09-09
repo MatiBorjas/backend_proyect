@@ -12,29 +12,24 @@ class ContenedorKnex {
   //---------------------------------------------------------------------
   //    METODO GET ALL
   //---------------------------------------------------------------------
-  getAll = () => {
+  async getAll(){
     try {
-      let datos;
-      this.knex(this.table)
-        .select('*')
-        .then((res) => res)
-        .catch((e) => console.log('Error: ' + e))
-        datos = res;
-      return datos;
+      const productos = await this.knex(this.table)
+          return productos;
     } 
     catch (error) {
-      console.log('Hubo un error en la lectura de archivos')
+      console.log('Hubo un error en la lectura de archivos ' + error)
     }
   };
 
   //---------------------------------------------------------------------
   //        METODO SAVE
   //---------------------------------------------------------------------
-  save = (obj) => {
+  async save(obj) {
     try{
-      let guardar = this.knex(this.table)
+      let guardar = await this.knex(this.table)
         .insert(obj)
-        .then((res) => res)
+        .then((res) => console.log('El producto fue agregado exitosamente'))
         .catch((err) => console.log(err))
         .finally(() => this.knex.destroy());
       return guardar;

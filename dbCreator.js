@@ -27,7 +27,7 @@ let crearTablaMensajes = () => {
     .hasTable('chats')
     .then(function(exists){
       if(!exists) {
-        return knexSQLite.schema.createTable('productos', (table) => {
+        return knexSQLite.schema.createTable('chats', (table) => {
           table.increments('id_msg');
           table.string('correo');
           table.integer('mensaje');
