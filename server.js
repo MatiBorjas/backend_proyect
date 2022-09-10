@@ -76,8 +76,6 @@ router.get("/", async(req, res) => {
   }
 });
 
-
-
 let adminAcces = true;
 
 io.on('connection', async (socket) => {
@@ -85,19 +83,19 @@ io.on('connection', async (socket) => {
 
   let productosData = await productos.getAll();
   let chatData = await chats.getAll();
-  
+
   io.sockets.emit('productos', productosData);
   io.sockets.emit('chat', chatData);
   
-  socket.on('nuevoMsg', (msg) => {
-    chats.save(msg)
-    let nuevoChat = chats.getAll();
+  socket.on('nuevoMsg', async (msg) => {
+    await chats.save(msg)
+    let nuevoChat = await chats.getAll();
     io.sockets.emit('chat', nuevoChat);
   });
   
-  socket.on('productoNvo', (nuevoProducto) => {
-    productos.save(nuevoProducto)
-    let productoAgregado = productos.getAll();
+  socket.on('productoNvo', async (nuevoProducto) => {
+    await productos.save(nuevoProducto)
+    let productoAgregado = await productos.getAll();
     io.sockets.emit('productos', productoAgregado)
   });
 

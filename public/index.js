@@ -46,6 +46,8 @@ function agregarProducto(nvoProducto){
   let datosProducto = {
     nombre: nvoProducto.nombre.value,
     precio: nvoProducto.precio.value,
+    duracion: nvoProducto.duracion.value,
+    frecuencia:nvoProducto.frecuencia.value,
     thumbnail: nvoProducto.thumbnail.value
   }
   
