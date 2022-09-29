@@ -1,37 +1,46 @@
-// const fs = require('fs')
-
 //---------------------------------------------------------------------
 //        EXPRESS
 //---------------------------------------------------------------------
-const express = require("express");
-const { Router } = express
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import productosRouter from "./routes/productos.js";
 
+//---------------------------------------------------------------------
+//       Creacion de servidor e implementacion Websockets.Io
+//---------------------------------------------------------------------
 const app = express();
-const router = Router()
 const PORT = process.env.PORT || 8080;
+const httpServer = createServer(app);
+const io = new Server(httpServer, {});
 
-//---------------------------------------------------------------------
-//        Implementacion Websockets.Io
-//---------------------------------------------------------------------
-const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer);
-httpServer.listen(PORT, () => console.log("SERVER ON"));
+//Inicio del servidor
+httpServer.listen(PORT, () => console.log("Servidor funcionando en puerto " + `${PORT}`));
 
 //---------------------------------------------------------------------
 //        MIDDLEWARE
 //---------------------------------------------------------------------
-  //Para lectura de JSon desde el server
+
+app.use('/public', express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-  //Configuracion path del router
-app.use('/api/productos', router)
-app.use('/public', express.static(__dirname + '/public'));
-
-
-//---------------------------------------------------------------------
-//        Motor EJS
-//---------------------------------------------------------------------
+//Motor ejs
 app.set('view engine', 'ejs');
+
+
+//Ruta de api
+app.use(productosRouter)
+
+
+
+
+
+
+
+
+
+
+
 
 //---------------------------------------------------------------------
 //            CLASES
