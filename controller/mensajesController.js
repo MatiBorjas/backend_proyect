@@ -2,17 +2,15 @@ import mongoose from "mongoose";
 import schemaMensaje from "../models/schemaMensaje.js";
 
 class MensajesController {
-  async connectMDB(){
+  constructor() {
     try {
-    
-      mongoose.conect(
-      "mongodb+srv://admin:admin@ecommerce.sewmc4q.mongodb.net/?retryWrites=true&w=majority"),
+      mongoose.connect(
+      "mongodb+srv://admin:admin123@ecommerce.sewmc4q.mongodb.net/test"),
       { useNewUrlParser: true };      
     } catch (error) {
-      console.log(error);
-      
+      console.log(error); 
     }  
-  }
+}
 
   async save(mensaje) {
     try {

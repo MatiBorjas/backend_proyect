@@ -5,8 +5,8 @@ export default function creadorProductosFaker(n = 5) {
     for (let i = 0; i < n; i++) {
         productos.push({
             id: faker.database.mongodbObjectId(),
-            nombre: faker.vehicle.vehicle(),
-            precio: faker.commerce.price(100000, 200000, 0, $),
+            name: faker.vehicle.vehicle(),
+            price: faker.commerce.price(100000, 200000, 0, "$"),
             thumbnail: faker.image.avatar()
         });
     }
