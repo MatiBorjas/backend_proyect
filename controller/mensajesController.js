@@ -5,7 +5,7 @@ class MensajesController {
   constructor() {
     try {
       mongoose.connect(
-      "mongodb+srv://admin:admin123@ecommerce.sewmc4q.mongodb.net/test"),
+        "mongodb+srv://admin:admin123@ecommerce.sewmc4q.mongodb.net/test"),
       { useNewUrlParser: true };      
     } catch (error) {
       console.log(error); 
