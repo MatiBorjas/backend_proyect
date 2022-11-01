@@ -4,7 +4,7 @@ import schemaMensaje from "../models/schemaMensaje.js";
 class MensajesController {
   constructor() {
     try {
-      mongoose.connect(
+      mongoose.createConnection(
         "mongodb+srv://admin:admin123@ecommerce.sewmc4q.mongodb.net/test"),
       { useNewUrlParser: true };      
     } catch (error) {
