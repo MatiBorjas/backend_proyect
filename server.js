@@ -8,14 +8,20 @@ import express from "express";
 import session from "express-session";
 import { Server } from "socket.io";
 import { socketController } from "./src/utils/socketController.js"
-import { productosRouter, homeRouter, loginRouter, signupRouter, logoutRouter, } from "./routes/index.js";
+import { productosRouter, homeRouter, loginRouter, signupRouter, logoutRouter, infoRouter, apiRandomRouter } from "./routes/index.js";
 // import MongoStore from "connect-mongo";
+
+//---------------------------------------------------------------------
+//                      VARIABLES DE ENTORNO
+//---------------------------------------------------------------------
+
+import { MONGOPW, PORT } from "./config.js"
 
 //---------------------------------------------------------------------
 //       Creacion de servidor e implementacion Websockets.Io
 //---------------------------------------------------------------------
 const app = express();
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 const httpServer = createServer(app);
 const io = new Server(httpServer, {});
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
@@ -44,7 +50,7 @@ app.use(express.urlencoded({ extended: true }));
 //CONECCION A DB
 mongoose
   .connect(
-    `mongodb+srv://admin:admin123@ecommerce.sewmc4q.mongodb.net/?retryWrites=true&w=majority`,
+    `mongodb+srv://admin:${MONGOPW}@ecommerce.sewmc4q.mongodb.net/?retryWrites=true&w=majority`,
     { useNewUrlParser: true }
   );
 
@@ -183,11 +189,13 @@ app.get("/", (req, res) => {
   res.send("Bienvenidos a Hipercompumundomegared");
 });
 
-app.use("/api/productos-test", productosRouter);
+app.use("/api/productos", productosRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/home", homeRouter);
-app.get("/logout", logoutRouter);
+app.use("/logout", logoutRouter);
+app.use("/info", infoRouter);
+app.use("/api/random", apiRandomRouter);
 
 
 function checkAuthentication(req, res, next) {
