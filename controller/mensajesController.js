@@ -40,5 +40,3 @@ class MensajesController {
 }
 
 export default MensajesController;
-
-

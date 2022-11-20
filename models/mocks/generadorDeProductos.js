@@ -11,4 +11,4 @@ export default function creadorProductosFaker(n = 5) {
         });
     }
     return productos;
-}
+};

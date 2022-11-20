@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import http from "http";
 import { createServer } from "http";
 import express from "express";
 import session from "express-session";
@@ -15,7 +16,7 @@ import { productosRouter, homeRouter, loginRouter, signupRouter, logoutRouter, i
 //                      VARIABLES DE ENTORNO
 //---------------------------------------------------------------------
 
-import { MONGOPW, PORT } from "./config.js"
+import { MONGOPW, PORT, MODO } from "./config.js"
 
 //---------------------------------------------------------------------
 //       Creacion de servidor e implementacion Websockets.Io
@@ -167,14 +168,11 @@ app.use(passport.session());
 //   })
 // );
 
+//Maxage
 app.use((req, res, next) => {
   req.session.touch();
   next();
 });
-
-//Inicio del servidor
-httpServer.listen(PORT, () => console.log("Servidor funcionando en puerto " + `${PORT}`));
-
 
 //---------------------------------------------------------------------//
 //                            RUTAS                                    //
@@ -212,6 +210,56 @@ app.get("/ruta-protegida", checkAuthentication, (req, res) => {
   res.send("<h1>Ruta ok!</h1>" + JSON.stringify(user));
 });
 
+//---------------------------------------------------------------------//
+//                    SERVIDOR FORK FOREVER                            //
+//---------------------------------------------------------------------//
+// const cluster = require("cluster");
+import cluster from "cluster";
+// const os = require("os");
+import os from "os";
+
+const numCPUs = os.cpus().length;
+
+if (MODO === "CLUSTER") {
+  if (cluster.isPrimary) {
+    console.log("MODO CLUSTER");
+    console.log("Servidor Funcionando en Puerto: " + PORT);
+    console.log(`Master es el PID ${process.pid} `);
+    // fork workers.
+    console.log(numCPUs);
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
+    cluster.on("exit", (worker, code, signal) => {
+      cluster.fork();
+      console.log(`worker ${worker.process.pid} murio`);
+    });
+  } else {
+    const httpServer = http.createServer(app);
+    httpServer.listen(PORT, () => {
+      console.log(`inicie un Worker nuevo ${process.pid}`);
+    });
+    ////////////////////// SOCKET
+    const io = new Server(httpServer, {});
+    socketController(io);
+    /////////////////////
+  }
+} else {
+  const httpServer = http.createServer(app);
+  //////////////////////// SOCKET
+  const io = new Server(httpServer, {});
+  socketController(io);
+  ///////////////////////
+  httpServer.listen(PORT, () => {
+    console.log("Servidor Funcionando en Puerto: " + PORT);
+    console.log("MODO FORK");
+  });
+  httpServer.on("error", (error) => console.log(`Error en servidor ${error}`));
+}
+
 //Socket
 // import { socketModel } from "./src/utils/socket.js";
 // socketModel(io);
+
+//Inicio del servidor
+// httpServer.listen(PORT, () => console.log("Servidor funcionando en puerto " + `${PORT}`));

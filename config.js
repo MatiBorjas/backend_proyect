@@ -8,4 +8,11 @@ const args = parseArgs(process.argv.slice(2));
 const PORT = args.PORT || process.env.PORT || 8080;
 const MONGOPW = process.env.MONGOATLAS;
 
-export { PORT, MONGOPW };
+let MODO;
+if (args["_"].includes("CLUSTER")) {
+  MODO = "CLUSTER";
+} else {
+  MODO = "FORK";
+}
+
+export { PORT, MONGOPW, MODO };
