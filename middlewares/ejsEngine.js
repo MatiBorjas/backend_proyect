@@ -8,4 +8,3 @@ const ejsEngine = (app, express) => {
 };
 
 export { ejsEngine };
-
