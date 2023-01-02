@@ -1,14 +1,12 @@
 import { Router } from "express";
+import { passport } from "passport";
+import { homeController } from "../controller/homeController";
+import { passportJwt } from "../middlewares/passport";
 const homeRouter = Router();
 
-homeRouter.get("/", (req, res, next) => {
-  if (req.isAuthenticated()) {
-    res.render("pages/home", {
-      name: req.session.username,
-    });
-  } else {
-    res.redirect("/login/faillogin");
-  }
-});
+homeRouter.get("/", passport.authenticate("jwt", { session: false }),
+homeController.get
+);
+homeRouter.get("/info", homeController.getInfo);
 
-export default homeRouter;
+export { homeRouter };

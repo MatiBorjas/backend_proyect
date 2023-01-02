@@ -13,7 +13,7 @@ import { enviarWhatsapp } from "../services/whatsappServices";
 
 // import { errorLogger } from "../src/utils/loggers";
 
-const cartController = {
+const carritoController = {
   get: async (req, res) => {
     try {
       if (req.isAuthenticated()) {
@@ -123,4 +123,4 @@ const cartController = {
     }
   },
 };
-export { cartController };
+export { carritoController };

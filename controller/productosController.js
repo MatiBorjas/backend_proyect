@@ -6,7 +6,7 @@ import {
   updateProducto,
 } from "../services/productosServices";
 
-const productController = {
+const productosController = {
   get: async (req, res) => {
     try {
       let products = await getProductos();
@@ -97,4 +97,4 @@ const productController = {
   },
 };
 
-export { productController };
+export { productosController };
