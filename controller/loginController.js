@@ -1,4 +1,5 @@
 export const loginController = {
+
   get: (req, res) => {
     try {
       if (req.isAuthenticated()) {
@@ -16,15 +17,18 @@ export const loginController = {
     try {
       const { username } = req.user;
       req.session.username = username;
-      res.redirect("/home");
+      // res.redirect("/home");
+      res.send(req.user);
     } catch (error) {
-      return res.status(500).send({ status: "Log In error", body: error });
+      return res
+      .status(500)
+      .send({ status: "Log In error", body: error });
     }
   },
 
   errorLogin: (req, res) => {
     try {
-      res.render("pages/errorLogin");
+      res.status(200).render("pages/errorLogin");
     } catch (error) {
       res.status(500).send({ status: "Log In error", body: error });
     }

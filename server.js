@@ -49,11 +49,11 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //CONECCION A DB
-mongoose
-  .connect(
-    `mongodb+srv://admin:${MONGOPW}@ecommerce.sewmc4q.mongodb.net/?retryWrites=true&w=majority`,
-    { useNewUrlParser: true }
-  );
+// mongoose
+//   .connect(
+//     `mongodb+srv://admin:${MONGOPW}@ecommerce.sewmc4q.mongodb.net/?retryWrites=true&w=majority`,
+//     { useNewUrlParser: true }
+//   );
 
 
   //MOTOR EJS
@@ -119,24 +119,24 @@ passport.use(
 );
 
 //CONFIGURACION DE REDIS
-const client = redis.createClient({ legacyMode: true });
-client.connect();
-const RedisStore = connectRedis(session);
+// const client = redis.createClient({ legacyMode: true });
+// client.connect();
+// const RedisStore = connectRedis(session);
 
-app.use(
-  session({
-    store: new RedisStore({ host: "localhost", port: 6379, client, ttl: 300 }),
-    secret: "keyboard cat",
-    cookie: {
-      httpOnly: false,
-      secure: false,
-      maxAge: 86400000, // 1 dia
-    },
-    rolling: true,
-    resave: true,
-    saveUninitialized: false,
-  })
-);
+// app.use(
+//   session({
+//     store: new RedisStore({ host: "localhost", port: 6379, client, ttl: 300 }),
+//     secret: "keyboard cat",
+//     cookie: {
+//       httpOnly: false,
+//       secure: false,
+//       maxAge: 86400000, // 1 dia
+//     },
+//     rolling: true,
+//     resave: true,
+//     saveUninitialized: false,
+//   })
+// );
 
 // MIDDLEWARES DE PASSPORT
 //passport necesita hacer esto con todas las sesiones, debido a que tiene muchas estrategias, para poder guardar la sesion

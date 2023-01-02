@@ -1,4 +1,6 @@
-export const signupController = {
+import { emailRegistro } from "../services/emailServices";
+
+const signupController = {
     get: (req, res) => {
       try {
         if (req.isAuthenticated()) {
@@ -12,10 +14,11 @@ export const signupController = {
           .send({ status: "Get page Sign Up error", body: error });
       }
     },
-    postsignup: (req, res) => {
+    postsignup: async (req, res) => {
       try {
         const { username } = req.user;
         req.session.username = username;
+        await emailRegistro(req.user);
         res.redirect("/home");
       } catch (error) {
         return res.status(500).send({ status: "Sign Up error", body: error });
@@ -30,3 +33,5 @@ export const signupController = {
       }
     },
   };
+
+  export { signupController };
