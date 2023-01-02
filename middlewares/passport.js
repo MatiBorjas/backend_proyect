@@ -95,7 +95,7 @@ const deserializeUser = () => {
   });
 };
 
-module.exports = {
+export {
   loginPassport,
   signUpPassport,
   serializeUser,
