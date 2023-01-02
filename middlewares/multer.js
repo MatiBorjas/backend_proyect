@@ -1,6 +1,6 @@
-const multer = require("multer");
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+import { multer } from "multer";
+import { path } from "path";
+import { v4 as uuidv4 } from 'uuid';
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "../public/uploads"),
@@ -22,9 +22,9 @@ const upLoad = multer({
     if (mimetype && extname) {
       return cb(null, true);
     }
-    cb("error: archivo debe ser una imagen");
+    cb("error: El archivo debe ser una imagen");
   },
   // dest: path.join(__dirname, "../public/uploads"),  });
 }).single("image");
 
-module.exports = { upLoad };
+export { upLoad };
