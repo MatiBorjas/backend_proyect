@@ -1,10 +1,10 @@
-import { homeRouter } from "./homeRouter";
-import { loginRouter } from "./loginRouter";
-import { logoutRouter } from "./logoutRouter";
-import { signupRouter } from "./signupRouter";
-import { infoRouter } from "./infoRouter";
-import { productosRouter } from "./productosRouter";
-import { carritoRouter } from "./carritoRouter";
+import { homeRouter } from "./homeRouter.js";
+import { loginRouter } from "./loginRouter.js";
+import { logoutRouter } from "./logoutRouter.js";
+import { signupRouter } from "./signupRouter.js";
+import { infoRouter } from "./infoRouter.js";
+import { productosRouter } from "./productosRouter.js";
+import { carritoRouter } from "./carritoRouter.js";
 
 const Router = (app) => {
   app.use((req, res, next) => {

@@ -1,6 +1,5 @@
-import { createCarrito } from "../services/cartServices";
-import { usuarioUpdate } from "../services/usuarioServices";
-// import { errorLogger } from "../src/utils/loggers";
+import { createCarrito } from "../services/carritoServices.js";
+import { usuarioUpdate } from "../services/usuarioServices.js";
 
 const homeController = {
   get: async (req, res) => {
@@ -16,18 +15,19 @@ const homeController = {
           user: req.user,
         });
       } else {
-        res.redirect("/login/faillogin");
+        res.redirect("/login");
       }
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,
       });
     }
   },
+
   getInfo: async (req, res) => {
     try {
       if (req.isAuthenticated()) {
@@ -39,9 +39,9 @@ const homeController = {
         res.redirect("/login/faillogin");
       }
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,

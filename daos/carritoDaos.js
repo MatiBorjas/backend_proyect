@@ -1,5 +1,5 @@
-import { Carritos } from "../models/carritoSchema";
-import Usuarios from "../models/usuarioSchema";
+import { Carritos } from "../models/carritoSchema.js";
+import Usuarios from "../models/usuarioSchema.js";
 
 const create = async (userId) => {
   try {

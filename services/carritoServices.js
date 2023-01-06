@@ -1,4 +1,4 @@
-import { create, get, post, del, deleteAllCarrito } from "../daos/carritoDaos";
+import { create, get, post, del, deleteAllCarrito } from "../daos/carritoDaos.js";
 
 const createCarrito = async (userId) => {
   return await create(userId);

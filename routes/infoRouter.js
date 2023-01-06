@@ -1,5 +1,5 @@
 import { Router }from "express";
-import { parseArgs } from "minimist";
+import parseArgs from "minimist";
 import os from "os";
 
 const infoRouter = Router();

@@ -1,8 +1,8 @@
 import express from "express";
-import { cors }from "cors";
+import cors from "cors";
 
-import { sessionMiddleware } from "./middlewares/session.js";
-import { ejsEngine } from "./middlewares/ejsEngine.js";
+import { sessionMiddleware } from "./middlewares/midSession.js";
+import { ejsEngine } from "./middlewares/midEjsEngine.js";
 
 import { PORT } from "./src/config/config.js";
 import { connectMongoDB } from "./daos/mongoDb.js";

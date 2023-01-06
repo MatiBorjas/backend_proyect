@@ -1,7 +1,7 @@
-import { redis } from "redis";
-import { session } from "express-session";
-import { connectRedis } from "connect-redis";
-import { REDIS_HOST } from "./config";
+import redis from "redis";
+import session from "express-session";
+import connectRedis from "connect-redis";
+import { REDIS_HOST } from "./config.js";
 
 
 const client = redis.createClient({ legacyMode: true });

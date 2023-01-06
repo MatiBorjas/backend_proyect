@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const carritoRouter = Router();
 
-import carritoController from "../controller/carritoController";
+import { carritoController } from "../controller/carritoController.js";
 
 carritoRouter.get("/", carritoController.get);
 carritoRouter.post("/product", carritoController.post);

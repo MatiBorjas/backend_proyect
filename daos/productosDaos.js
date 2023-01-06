@@ -1,4 +1,4 @@
-import { Productos } from "../models/productosSchema";
+import { Productos } from "../models/productosSchema.js";
 
 const getAll = async () => {
   try {
@@ -43,4 +43,4 @@ const update = async (id, newBody) => {
   }
 };
 
-module.exports = { getAll, getById, save, del, update };
+export { getAll, getById, save, del, update };

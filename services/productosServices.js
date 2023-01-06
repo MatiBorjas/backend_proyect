@@ -4,7 +4,7 @@ import {
   save,
   del,
   update,
-} from "../daos/productosDaos";
+} from "../daos/productosDaos.js";
 
 const getProductos = async () => {
   return await getAll();
@@ -41,7 +41,7 @@ const updateProducto = async (id, newBody) => {
   await update(id, newBody);
 };
 
-module.exports = {
+export {
   getProductos,
   getProducto,
   saveProducto,

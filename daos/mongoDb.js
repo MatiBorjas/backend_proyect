@@ -1,6 +1,6 @@
 import { mongoose } from "mongoose" ;
 
-import { MONGOATLASUSR, MONGOATLASPW } from "../src/config/config";
+import { MONGOATLASUSR, MONGOATLASPW } from "../src/config/config.js";
 // const { logger } = require("../src/utils/loggers");
 
 const connectMongoDB = () => {

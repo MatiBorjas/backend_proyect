@@ -1,4 +1,4 @@
-import { emailRegistro } from "../services/emailServices";
+import { emailRegistro } from "../services/emailServices.js";
 
 const signupController = {
     get: (req, res) => {

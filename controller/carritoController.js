@@ -3,13 +3,13 @@ import {
   saveToCarrito,
   deleteProdInCarrito,
   deleteCarrito,
-} from "../services/cartServices"
+} from "../services/carritoServices.js"
 
-import { getProducto } from "../services/productosServices";
+import { getProducto } from "../services/productosServices.js";
 
-import { emailDeCompra } from "../services/emailServices";
-import { enviarSMS } from "../services/smsServices";
-import { enviarWhatsapp } from "../services/whatsappServices";
+import { emailDeCompra } from "../services/emailServices.js";
+import { enviarSMS } from "../services/smsServices.js";
+import { enviarWhatsapp } from "../services/whatsappServices.js";
 
 
 const carritoController = {
@@ -122,4 +122,5 @@ const carritoController = {
     }
   },
 };
+
 export { carritoController };

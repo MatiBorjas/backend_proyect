@@ -1,12 +1,9 @@
-import { passport } from "passport";
+import  passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
-import JWTStrategy from "passport-jwt";
-import ExtractJWT from "passport-jwt";
+import Usuarios from "../models/usuarioSchema.js";
 
-import Usuarios from "../models/usuarioSchema";
-
-import { isValidPassword, createHash } from "../src/utils/passwordsFunctions";
+import { isValidPassword, createHash } from "../src/utils/passwordsFunctions.js";
 
 const loginPassport = {
   localStrategy: new LocalStrategy((username, password, done) => {
@@ -68,22 +65,6 @@ const signUpPassport = {
   ),
 };
 
-const passportJwt = {
-  strategy: new JWTStrategy(
-    {
-      secretOrKey: "top_secret",
-      jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
-    },
-    async (token, done) => {
-      try {
-        return done(null, token.user);
-      } catch (error) {
-        return next(error);
-      }
-    }
-  ),
-};
-
 const serializeUser = () => {
   passport.serializeUser((user, done) => {
     done(null, user._id);
@@ -100,5 +81,4 @@ export {
   signUpPassport,
   serializeUser,
   deserializeUser,
-  passportJwt,
 };

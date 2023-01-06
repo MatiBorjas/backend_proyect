@@ -1,5 +1,5 @@
-import { parseArgs } from "minimist";
-import { dotenv }from "dotenv";
+import parseArgs from "minimist";
+import dotenv from "dotenv";
 
 dotenv.config();
 

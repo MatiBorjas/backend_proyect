@@ -5,17 +5,15 @@ import {
   signUpPassport,
   serializeUser,
   deserializeUser,
-  passportJwt,
-} from "./passport";
-import { redisSession } from "../src/config/redisConfig";
+} from "./midPassport.js";
+import { redisSession } from "../src/config/redisConfig.js";
 
 const sessionMiddleware = (app) => {
   redisSession(app);
 
   passport.use("login", loginPassport.localStrategy);
   passport.use("signup", signUpPassport.localStrategy);
-  passport.use("jwt", passportJwt.strategy);
-
+  
   serializeUser();
   deserializeUser();
 

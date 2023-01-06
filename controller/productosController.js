@@ -4,7 +4,7 @@ import {
   saveProducto,
   deleteProducto,
   updateProducto,
-} from "../services/productosServices";
+} from "../services/productosServices.js";
 
 const productosController = {
   get: async (req, res) => {

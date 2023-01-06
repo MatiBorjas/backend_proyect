@@ -1,4 +1,4 @@
-export const loginController = {
+const loginController = {
 
   get: (req, res) => {
     try {
@@ -34,3 +34,5 @@ export const loginController = {
     }
   },
 };
+
+export { loginController };
