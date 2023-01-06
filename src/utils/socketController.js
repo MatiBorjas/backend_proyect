@@ -3,7 +3,7 @@ import { normalizarMensajes } from "../normalizr/normalizarMensajes.js";
 
 const messagesController = new MensajesController();
 
-export const socketController = (io) => {
+const socketController = (io) => {
   io.on("connection", async (socket) => {
     console.log("Nuevo Cliente Conectado: " + socket.id);
     io.sockets.emit(
@@ -20,3 +20,5 @@ export const socketController = (io) => {
     });
   });
 };
+
+export { socketController };

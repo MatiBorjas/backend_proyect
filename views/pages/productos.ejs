@@ -24,7 +24,7 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Price</th>
-          <!-- <th scope="col">Imagen</th> -->
+          <th scope="col">Imagen</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -46,7 +46,7 @@
               </td>
               <td>
                 <!-- <button class="btn btn-success" onclick="addItem(`<%=element.id%>`)">Agregar a carrito</button> -->
-                <form action="/cart/product" method="POST">
+                <form action="/carrito/productos" method="POST">
                   <input type="hidden" name="prod_id" value=<%=element.id%>>
                   <button type="submit" class="btn btn-success">Agregar a carrito</button>
                 </form>

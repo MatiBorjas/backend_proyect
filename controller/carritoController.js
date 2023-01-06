@@ -11,7 +11,6 @@ import { emailDeCompra } from "../services/emailServices";
 import { enviarSMS } from "../services/smsServices";
 import { enviarWhatsapp } from "../services/whatsappServices";
 
-// import { errorLogger } from "../src/utils/loggers";
 
 const carritoController = {
   get: async (req, res) => {
@@ -19,12 +18,12 @@ const carritoController = {
       if (req.isAuthenticated()) {
         let cart = await getCarrito(req.user.cart_id);
 
-        res.render("pages/cart", { cartValid: true, cart });
+        res.render("pages/carrito", { cartValid: true, cart });
       }
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,
@@ -38,11 +37,11 @@ const carritoController = {
       let productoAlCarrito = await getProducto(req.body.prod_id);
       await saveToCarrito(cartId.id, productoAlCarrito);
 
-      res.redirect("/cart");
+      res.redirect("/carrito");
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,
@@ -54,15 +53,15 @@ const carritoController = {
     try {
       const { id } = req.params;
       let cartId = await getCarrito(req.user.cart_id);
-      let productoAlCarrito = await getProducto(id);
+      let productoEnCarrito = await getProducto(id);
 
-      let cart = await deleteProdInCarrito(cartId.id, productoAlCarrito);
+      let cart = await deleteProdInCarrito(cartId.id, productoEnCarrito);
 
       res.render("pages/carrito", { cartValid: true, cart });
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,
@@ -75,15 +74,15 @@ const carritoController = {
       const { id, idProd } = req.params;
 
       let cartId = await getCarrito(id);
-      let productToCart = await getProducto(idProd);
+      let productoEnCarrito = await getProducto(idProd);
 
-      let cart = await deleteProdInCarrito(cartId.id, productToCart);
+      let cart = await deleteProdInCarrito(cartId.id, productoEnCarrito);
 
       res.json(cart);
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,
@@ -113,9 +112,9 @@ const carritoController = {
 
       res.redirect("/home");
     } catch (error) {
-      // errorLogger.error({
-      //   error: error.message,
-      // });
+      console.error({
+        error: error.message,
+      });
       res.status(500).send({
         status: 500,
         message: error.message,

@@ -13,7 +13,7 @@ const debuggChat = (messages) => {
   return arr;
   };
 
-  export const normalizarMensajes = (msj) => {
+  const normalizarMensajes = (msj) => {
   //depuro y foramteo el char el chat
   const debuggedChat = debuggChat(msj);
   //Creo las entidades
@@ -27,3 +27,5 @@ const debuggChat = (messages) => {
 
   return normalizedPosts;
 };
+
+export { normalizarMensajes };

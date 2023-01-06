@@ -12,7 +12,12 @@ const RedisStore = connectRedis(session);
 const redisSession = (app) => {
   app.use(
     session({
-      store: new RedisStore({ host: REDIS_HOST, port: 6379, client, ttl: 300 }),
+      store: new RedisStore({ 
+        host: REDIS_HOST, 
+        port: 6379, 
+        client, 
+        ttl: 300
+      }),
       secret: "keyboard cat",
       cookie: {
         httpOnly: false,

@@ -13,7 +13,7 @@ const REDIS_PSW = process.env.REDIS_PSW;
 
 const TEST_MAIL = process.env.TEST_MAIL;
 const TEST_MAIL_PASS = process.env.TEST_MAIL_PASS;
-// const TEST_MAIL_TO = process.env.TEST_MAIL_TO;
+const TEST_MAIL_TO = process.env.TEST_MAIL_TO;
 
 export {
   PORT,
@@ -23,5 +23,5 @@ export {
   REDIS_PSW,
   TEST_MAIL,
   TEST_MAIL_PASS,
-  // TEST_MAIL_TO,
+  TEST_MAIL_TO,
 };

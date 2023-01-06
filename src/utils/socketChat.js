@@ -2,7 +2,7 @@ import MensajesController from "../../controller/mensajesController.js";
 const messagesController = new MensajesController();
 import { normalizarMensajes } from "../normalizr/normalizarMensajes.js";
 
-export async function chatSocket(socket, io) {
+async function chatSocket(socket, io) {
   let messages = await messagesController.getAll();
   io.sockets.emit("messages", normalizarMensajes(messages));
   //queda escuchando el siguiente socket, socket es el usuario/cliente
@@ -14,3 +14,5 @@ export async function chatSocket(socket, io) {
     io.sockets.emit("messages", normalizarMensajes(allMessages));
   });
 }
+
+export { chatSocket };

@@ -7,50 +7,100 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="/styles.css" />
-  <title>CursoBackEnd</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <title>Proyecto Backend</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100 ">
   <header>
     <%- include('../partials/navbar')%>
   </header>
-  <div class="container d-flex flex-column w-25 h-50 mt-auto bg-success text-dark bg-opacity-25 p-5 rounded">
+  <div
+    class="container d-flex flex-column col-sm-12 col-md-6 col-xl-3 mt-auto bg-success text-dark bg-opacity-25 p-5 rounded">
     <h1 class="text-center text-uppercase"> REGISTRARSE
     </h1>
 
     <h3 id="div-compres" class="text-center"></h3>
 
-    <form action="" method="post">
-      <div id="login-div" class="d-flex flex-column align-items-center">
-        <input type="text" id="username" name="username" class="form-control m-1" value="" placeholder="Username" />
+    <form action="" enctype="multipart/form-data" method="post" class="needs-validation" novalidate
+      onsubmit="process(event); return continueornot()">
+      <div id=" login-div" class="d-flex flex-column align-items-center">
+        <input type="text" id="name" name="name" class="form-control m-1" value="" placeholder="Nombre" required />
+
+        <input type="number" id="age" name="age" class="form-control m-1" value="" placeholder="Edad" required />
+
+        <input type="text" id="address" name="address" class="form-control m-1" value="" placeholder="Direccion"
+          required />
+
+        <input type="text" id="username" name="username" class="form-control m-1" value="" placeholder="Email"
+          required />
+
         <input type="password" id="password" name="password" class="form-control m-1" value="" placeholder="Password"
-          autocomplete="off" />
+          required autocomplete="off" />
+
+        <input type="tel" id="phone" name="phone" class="form-control w-100" value="" placeholder="Telefono" required />
+
+        <label for="image" class="form-check-label mt-3">Sube una foto para tu Avatar </label>
+        <input class="form-control m-1 " id="image" type="file" name="image" required>
+
+        <hr />
+        <div>
+          <input type="checkbox" id="show-password"> Mostrar Contraseña
+        </div>
+
       </div>
-      <div class=" d-flex flex-row justify-content-center text-center w-100">
-        <button type="submit" id="login-btn" class="btn btn-primary  m-1 w-50">
+      <div class="d-flex flex-row justify-content-center text-center ">
+        <button type="submit" id="login-btn" class="btn btn-primary  col-6">
           Registrarse
         </button>
       </div>
     </form>
 
-    <div class=" d-flex flex-column align-items-center text-center w-100 ">
+    <div class="alert alert-info" style="display: none;"></div>
+
+    <div class=" d-flex flex-column align-items-center text-center ">
       <div><br></div>
-      <button onclick="location.href='/login'" class="btn btn-success w-50 ">
+      <button onclick="location.href='/login'" class="btn btn-success col-6 ">
         Volver a Login
       </button>
     </div>
-
-
-
   </div>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
-  <!-- <script type="module" src="/login.js"></script> -->
   <footer class="mt-auto footer">
     <%- include('../partials/footer')%>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script src="/js/validateEmail.js"></script>
+  <script src="/js/showPassword.js"></script>
+  <script>
+    (() => {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      preferredCountries: ["ar", "uy", "bo", "ur"],
+      utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+    const info = document.querySelector(".alert-info");
+    function process(event) {
+      const phoneNumber = phoneInput.getNumber();
+      phoneInputField.value = phoneNumber
+    }
+  </script>
 </body>
 
 </html>

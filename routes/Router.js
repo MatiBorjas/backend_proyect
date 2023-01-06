@@ -1,14 +1,14 @@
-const homeRouter = require("./homeRouter");
-const loginRouter = require("./loginRouter");
-const logoutRouter = require("./logoutRouter");
-const signupRouter = require("./signupRouter");
-const infoRouter = require("./infoRouter");
-const productRouter = require("./productRouter");
-const cartRouter = require("./cartRouter");
+import { homeRouter } from "./homeRouter";
+import { loginRouter } from "./loginRouter";
+import { logoutRouter } from "./logoutRouter";
+import { signupRouter } from "./signupRouter";
+import { infoRouter } from "./infoRouter";
+import { productosRouter } from "./productosRouter";
+import { carritoRouter } from "./carritoRouter";
 
 const Router = (app) => {
   app.use((req, res, next) => {
-    logger.info({ URL: req.originalUrl, method: req.method });
+    console.log({ URL: req.originalUrl, method: req.method });
     next();
   });
 
@@ -21,11 +21,11 @@ const Router = (app) => {
   app.use("/logout", logoutRouter);
   app.use("/home", homeRouter);
   app.use("/info", infoRouter);
-  app.use("/products", productRouter);
-  app.use("/cart", cartRouter);
+  app.use("/productos", productosRouter);
+  app.use("/carrito", carritoRouter);
 
   app.all("*", (req, res) => {
-    logger.warn({ URL: req.originalUrl, method: req.method });
+    console.log({ URL: req.originalUrl, method: req.method });
     res.status(404).end();
   });
 };
