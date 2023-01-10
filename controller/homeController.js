@@ -3,6 +3,14 @@ import { usuarioUpdate } from "../services/usuarioServices.js";
 
 const homeController = {
   get: async (req, res) => {
+
+    // res.json({
+    //   user: req.user ? req.user : false,
+    //   query: req.query.secret_token ? req.query.secret_token : false,
+    //   session: req.session,
+    //   isAuthenticated: req.isAuthenticated(),
+    // });
+
     try {
       if (req.isAuthenticated()) {
         const { cart_id } = req.user;
@@ -12,7 +20,7 @@ const homeController = {
           await usuarioUpdate(req.user._id, newCartId);
         }
         res.render("pages/home", {
-          user: req.user,
+          name: req.user.name,
         });
       } else {
         res.redirect("/login");
@@ -31,7 +39,7 @@ const homeController = {
   getInfo: async (req, res) => {
     try {
       if (req.isAuthenticated()) {
-        res.render("pages/infoUser", {
+        res.render("pages/infoUsuario", {
           user: req.user,
         });
         res.end();

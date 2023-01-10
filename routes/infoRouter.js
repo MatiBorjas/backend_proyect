@@ -4,9 +4,10 @@ import os from "os";
 
 const infoRouter = Router();
 
-infoRouter.get("/info", (req, res) => {
+infoRouter.get("/", (req, res) => {
   try {
     const args = parseArgs(process.argv.slice(2));
+    console.log(args);
     const info = {
       args: JSON.stringify(args),
       directorioActual: process.cwd(),

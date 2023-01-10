@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 import { productoSchema } from "./productosSchema.js";
 
-export const carritoSchema = new mongoose.Schema(
+const carritoSchema = new mongoose.Schema(
   {
-    productos: [productoSchema],
+    products: [productoSchema],
     user_id: { type: mongoose.Schema.ObjectId, required: true },
   },
   { timestamps: true }
 );
-export const Carritos = mongoose.model("Carrito", carritoSchema);
+
+const Carritos = mongoose.model("Carrito", carritoSchema);
+
+export { carritoSchema, Carritos }

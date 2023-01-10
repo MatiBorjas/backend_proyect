@@ -95,7 +95,7 @@ const carritoController = {
       let cart = await getCarrito(req.user.cart_id);
       let user = req.user;
 
-      const formattedProducts = cart.productos.map(
+      const formattedProducts = cart.products.map(
         (producto) =>
           `Producto: ${producto.name} <br />
         Precio: $${producto.price}
@@ -103,10 +103,10 @@ const carritoController = {
       );
 
       await emailDeCompra(formattedProducts, user);
-      await enviarSMS("La compra fue confirmada, su pedido esta en proceso");
-      await enviarWhatsapp(
-        "Se ha creado una nueva orden de compra de parte de: " + req.user.name
-      );
+      // await enviarSMS("La compra fue confirmada, su pedido esta en proceso");
+      // await enviarWhatsapp(
+      //   "Se ha creado una nueva orden de compra de parte de: " + req.user.name
+      // );
 
       await deleteCarrito(req.user.cart_id);
 

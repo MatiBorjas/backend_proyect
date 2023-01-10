@@ -1,5 +1,8 @@
-import { multer } from "multer";
-import { path } from "path";
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import { v4 as uuidv4 } from 'uuid';
 
 const storage = multer.diskStorage({
@@ -12,7 +15,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upLoad = multer({
+const upload = multer({
   storage,
   limits: { fileSize: 1000000 },
   fileFilter: (req, file, cb) => {
@@ -27,4 +30,4 @@ const upLoad = multer({
   // dest: path.join(__dirname, "../public/uploads"),  });
 }).single("image");
 
-export { upLoad };
+export { upload };

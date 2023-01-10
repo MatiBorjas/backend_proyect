@@ -18,7 +18,7 @@ const signupController = {
       try {
         const { username } = req.user;
         req.session.username = username;
-        await emailRegistro(req.user);
+        await emailRegistro(username);
         res.redirect("/home");
       } catch (error) {
         return res.status(500).send({ status: "Sign Up error", body: error });
