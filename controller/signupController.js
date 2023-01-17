@@ -16,9 +16,9 @@ const signupController = {
     },
     postsignup: async (req, res) => {
       try {
-        const { username } = req.user;
+        const { username, name, age, address, phone  } = req.user;
         req.session.username = username;
-        await emailRegistro(username);
+        await emailRegistro(username, name, age, address, phone);
         res.redirect("/home");
       } catch (error) {
         return res.status(500).send({ status: "Sign Up error", body: error });
